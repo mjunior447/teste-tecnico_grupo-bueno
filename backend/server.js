@@ -6,12 +6,14 @@ const port = 8080;
 
 app.use(express.json());
 
-app.get("/users", async (req, res) => {
+app.get("/users", async (_, res) => {
   try {
     const users = await getUsers();
-    res.send(users);
+    console.log(`Usuarios buscados com sucesso!`);
+
+    res.status(200).send(users);
   } catch (error) {
-    console.log("Erro ao buscar usuarios");
+    console.error("Erro ao buscar usuarios");
     console.error(error);
   }
 });
@@ -19,10 +21,63 @@ app.get("/users", async (req, res) => {
 app.post("/users", async (req, res) => {
   try {
     const { name, email } = req.body;
+
+    if (!name || !email) {
+      throw new Error("Propriedades faltando no corpo da requisição");
+    }
+
     const user = await createUser(name, email);
+    console.log(`Usuario criado!\nNome=${user.name} | Email=${user.email}`);
+
     res.status(201).send(user);
   } catch (error) {
-    console.log("Erro ao criar usuario");
+    console.error("Erro ao criar usuario");
+    console.error(error)
+
+    // trata erro de violacao de chave unica
+    if (error.errno === 1062) {
+      res.status(422).send({
+        message: "Ja existe um usuario com esse e-mail",
+      });
+    }
+  }
+});
+
+app.put("/users/:id", async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    if (!name || !email) {
+      throw new Error("Propriedades faltando no corpo da requisição");
+    }
+
+    const userId = req.params.id;
+    await updateUser(userId, name, email);
+
+    console.log(`Usuario com id ${userId} foi atualizado!`);
+    res.status(204).send();
+  } catch (error) {
+    console.error("Erro ao atualizar usuario");
+    console.error(error)
+
+    // trata erro de violacao de chave unica
+    if (error.errno === 1062) {
+      res.status(422).send({
+        message: "Ja existe um usuario com esse e-mail",
+      });
+    }
+  }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await deleteUser(userId);
+
+    console.log(`Usuario com id ${userId} foi excluido!`);
+    res.status(204).send();
+  } catch (error) {
+    console.log("Erro ao excluir usuario");
     console.error(error);
   }
 });

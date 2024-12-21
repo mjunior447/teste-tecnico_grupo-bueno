@@ -1,7 +1,7 @@
 {
   "name": "cadastro_usuarios",
   "version": "1.0.0",
-  "main": "database.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "dev": "npx nodemon server.js"
