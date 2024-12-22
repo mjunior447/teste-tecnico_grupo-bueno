@@ -70,3 +70,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .page-container {
+    @apply flex justify-center items-center w-full h-screen;
+  }
+}

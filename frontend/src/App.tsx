@@ -1,5 +1,7 @@
+import Home from "./pages/Home";
+
 function App() {
-  return <div className="text-6xl">listagem de usuarios</div>;
+  return <Home />;
 }
 
 export default App;
