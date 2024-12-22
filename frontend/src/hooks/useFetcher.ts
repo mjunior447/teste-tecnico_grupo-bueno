@@ -8,7 +8,7 @@ const useFetcher = () => {
   };
 
   const createUser = async (name: string, email: string) => {
-    const userCreated = await fetch(baseApiUrl + "users", {
+    const response = await fetch(baseApiUrl + "users", {
       method: "POST",
       headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({
@@ -17,10 +17,29 @@ const useFetcher = () => {
       }),
     });
 
-    return userCreated;
+    if (!response.ok) {
+      throw { status: response.status, message: response.statusText };
+    }
+
+    return response;
   };
 
-  const updateUser = async () => {};
+  const updateUser = async (id: string, name: string, email: string) => {
+    const response = await fetch(baseApiUrl + "users/" + id, {
+      method: "PUT",
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+      body: JSON.stringify({
+        name,
+        email,
+      }),
+    });
+
+    if (!response.ok) {
+      throw { status: response.status, message: response.statusText };
+    }
+
+    return response;
+  };
 
   const deleteUser = async () => {};
 
