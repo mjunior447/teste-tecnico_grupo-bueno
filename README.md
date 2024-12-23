@@ -22,8 +22,14 @@
 
 **Observação: caso queira testar as rotas do backend isoladamente, é possível fazer isso com o arquivo `test.http`. Para isso, no seu VSCode, instale a extensão `REST Client` para conseguir fazer as chamadas.**
 
+
+___
+
+
 ## Preparando o Frontend
 1. Abra outro terminal e navegue até a pasta /frontend
 2. Na raiz da pasta, rode o comando `npm install` para instalar as dependências do frontend
 3. Rode o comando `npm run dev` na raiz do frontend
 4. No navegador, acesse a URL indicada no terminal
+
+**Observação: caso o backend esteja servindo em uma porta diferente da 8080, é possível ajustar o frontend no arquivo `frontend/src/constants.ts`**
