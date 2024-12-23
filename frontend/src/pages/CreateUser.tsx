@@ -29,8 +29,7 @@ const CreateUser = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const usuario = await createUser(data.name, data.email);
-      console.log("usuario: ", usuario);
+      await createUser(data.name, data.email);
 
       toast({
         title: "Sucesso!",
@@ -59,7 +58,7 @@ const CreateUser = () => {
   return (
     <main className="page-container">
       <article className="flex flex-col gap-14 w-96">
-        <h1 className="text-2xl font-bold">Criar usuário</h1>
+        <h1 className="text-2xl font-bold text-gray-700">Criar usuário</h1>
         <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Nome</Label>
@@ -71,7 +70,7 @@ const CreateUser = () => {
                   type="text"
                   placeholder="Zé Fulano"
                   id="name"
-                  {...register("name", { required: true })}
+                  {...register("name")}
                   {...field}
                 />
               )}

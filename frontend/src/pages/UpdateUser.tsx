@@ -72,7 +72,9 @@ const UpdateUser = () => {
   return (
     <main className="page-container">
       <article className="flex flex-col gap-14 w-96">
-        <h1 className="text-2xl font-bold">Alterar dados do usuário</h1>
+        <h1 className="text-2xl font-bold text-gray-700">
+          Alterar dados do usuário
+        </h1>
         <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Nome</Label>

@@ -3,7 +3,8 @@ import { baseApiUrl } from "../constants";
 const useFetcher = () => {
   const getUsers = async () => {
     const response = await fetch(baseApiUrl + "users");
-    const users = response.json();
+    const users = await response.json();
+
     return users;
   };
 
@@ -41,7 +42,15 @@ const useFetcher = () => {
     return response;
   };
 
-  const deleteUser = async () => {};
+  const deleteUser = async (id: string) => {
+    const response = await fetch(baseApiUrl + "users/" + id, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao excluir usuario");
+    }
+  };
 
   return {
     getUsers,
