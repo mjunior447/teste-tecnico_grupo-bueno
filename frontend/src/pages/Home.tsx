@@ -13,7 +13,7 @@ const Home = () => {
   const getUsersList = useCallback(async () => {
     const usersList = await getUsers();
     setUsers(usersList);
-  }, [getUsers]);
+  }, [getUsers, setUsers]);
 
   useEffect(() => {
     getUsersList();
